@@ -1,4 +1,4 @@
-# bund-dashboard-mm<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -9,23 +9,23 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg:      #06090F;
-  --bg2:     #0C1219;
-  --bg3:     #111820;
-  --surface: #141D27;
-  --border:  rgba(255,255,255,0.06);
-  --gold:    #C9A84C;
-  --gold2:   #E8C87A;
-  --gold-dim: rgba(201,168,76,0.12);
-  --white:   #F4F1EB;
-  --dim:     rgba(244,241,235,0.45);
-  --muted:   rgba(244,241,235,0.22);
-  --red:     #E05252;
-  --red-dim: rgba(224,82,82,0.12);
-  --green:   #3DBB7F;
-  --green-dim: rgba(61,187,127,0.12);
-  --blue:    #4A9ECC;
-  --blue-dim: rgba(74,158,204,0.1);
+  --bg:      #FFFFFF;
+  --bg2:     #F5F7FA;
+  --bg3:     #EEF1F6;
+  --surface: #F0F4F8;
+  --border:  rgba(0,0,0,0.11);
+  --gold:    #8A6A10;
+  --gold2:   #B8902A;
+  --gold-dim: rgba(138,106,16,0.10);
+  --white:   #000000;
+  --dim:     #111111;
+  --muted:   #333333;
+  --red:     #B01E1E;
+  --red-dim: rgba(176,30,30,0.09);
+  --green:   #0F6B38;
+  --green-dim: rgba(15,107,56,0.09);
+  --blue:    #1558A0;
+  --blue-dim: rgba(21,88,160,0.09);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
@@ -35,10 +35,10 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--white);overf
 .cursor-ring{width:36px;height:36px;border:1px solid rgba(201,168,76,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform .4s ease}
 #progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:200;width:0%;transition:width .1s linear}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 64px;height:64px;background:rgba(6,9,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 64px;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .nav-items{display:flex;gap:0;list-style:none}
-.nav-items a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 16px;transition:color .2s;position:relative}
+.nav-items a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#000;font-weight:700;text-decoration:none;padding:8px 16px;transition:color .2s;position:relative}
 .nav-items a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .2s}
 .nav-items a:hover{color:var(--gold)}
 .nav-items a:hover::after{transform:scaleX(1)}
@@ -51,12 +51,12 @@ section+section{border-top:1px solid var(--border)}
 .sec-num::before{content:'';width:32px;height:1px;background:var(--gold)}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:16px;letter-spacing:-.01em}
 .sec-title em{font-style:italic;color:var(--gold)}
-.sec-lead{font-size:15px;font-weight:400;color:var(--dim);max-width:600px;line-height:1.75;margin-bottom:48px}
+.sec-lead{font-size:15px;font-weight:600;color:#111;max-width:600px;line-height:1.75;margin-bottom:48px}
 
 /* HERO */
 #hero{background:var(--bg);min-height:100vh;padding:0 96px;justify-content:center;align-items:center}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4}
-.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,144,42,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .hero-inner{position:relative;z-index:1;max-width:860px;width:100%;text-align:center}
 .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;margin-bottom:32px;opacity:0;animation:fadeUp .8s .2s forwards}
 .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,8vw,108px);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:40px;opacity:0;animation:fadeUp .9s .4s forwards}
@@ -80,17 +80,17 @@ section+section{border-top:1px solid var(--border)}
 .macro-panel.eu::before{background:var(--red)}
 .macro-panel.us::before{background:var(--green)}
 .mp-flag{font-size:28px;margin-bottom:8px;display:block}
-.mp-title{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:24px}
+.mp-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;margin-bottom:24px}
 .mp-points{list-style:none;display:flex;flex-direction:column;gap:10px}
-.mp-points li{display:flex;gap:12px;font-size:13.5px;color:rgba(244,241,235,.7);line-height:1.5}
+.mp-points li{display:flex;gap:12px;font-size:13.5px;color:#000;font-weight:500;line-height:1.5}
 .mp-points li::before{content:'—';color:var(--gold);flex-shrink:0;font-size:12px;margin-top:2px}
-.mp-verdict{margin-top:24px;padding:14px 18px;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;line-height:1.5}
+.mp-verdict{margin-top:24px;padding:14px 18px;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:600;line-height:1.5}
 .mp-verdict.eu{background:var(--red-dim);color:var(--red);border-left:2px solid var(--red)}
 .mp-verdict.us{background:var(--green-dim);color:var(--green);border-left:2px solid var(--green)}
 .macro-impl{margin-top:20px;display:flex;flex-direction:column;gap:0}
 .mi-row{display:flex;border-top:1px solid var(--border);padding:8px 0}
-.mi-key{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;width:120px;flex-shrink:0;padding-top:2px}
-.mi-val{font-size:12px;font-weight:600;color:var(--white)}
+.mi-key{font-family:'JetBrains Mono',monospace;font-size:9px;color:#000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;width:120px;flex-shrink:0;padding-top:2px}
+.mi-val{font-size:12px;font-weight:700;color:#000}
 .mi-val.red{color:var(--red)}
 .mi-val.green{color:var(--green)}
 
@@ -116,9 +116,9 @@ section+section{border-top:1px solid var(--border)}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:40px 0}
 .kpi{background:var(--surface);padding:28px 24px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
 .kpi:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.3)}
-.kpi-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.kpi-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:#000;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
 .kpi-val{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;line-height:1;margin-bottom:4px}
-.kpi-note{font-size:11px;color:var(--muted)}
+.kpi-note{font-size:11px;color:#222;font-weight:600}
 .kpi.k-red .kpi-val{color:var(--red)}
 .kpi.k-green .kpi-val{color:var(--green)}
 .kpi.k-gold .kpi-val{color:var(--gold)}
@@ -133,10 +133,10 @@ section+section{border-top:1px solid var(--border)}
 .data-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .data-block-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .dt{width:100%;border-collapse:collapse;font-size:13px}
-.dt th{background:rgba(255,255,255,.04);padding:9px 14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.dt th{background:rgba(0,0,0,.05);padding:9px 14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#000;font-weight:700}
 .dt th:first-child{text-align:left}
-.dt td{padding:9px 14px;border-bottom:1px solid var(--border);color:rgba(244,241,235,.7);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center}
-.dt td:first-child{text-align:left;font-family:'Syne',sans-serif;font-size:12px;color:var(--dim);font-weight:400}
+.dt td{padding:9px 14px;border-bottom:1px solid var(--border);color:#000;font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;font-weight:500}
+.dt td:first-child{text-align:left;font-family:'Syne',sans-serif;font-size:12px;color:#000;font-weight:700}
 .dt .win{color:var(--green);font-weight:500}
 .dt .lose{color:var(--red);font-weight:500}
 .dt .warn{color:var(--gold);font-weight:500}
@@ -149,18 +149,18 @@ section+section{border-top:1px solid var(--border)}
 /* STOP LOSS */
 .sl-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:start}
 .sl-chart-box{background:var(--surface);border:1px solid var(--border);padding:28px}
-.chart-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.chart-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:#000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
 .sl-levels{display:flex;flex-direction:column;gap:2px}
 .sl-level{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--surface);border:1px solid var(--border);transition:border-color .2s}
 .sl-level:hover{border-color:rgba(201,168,76,.3)}
-.sl-level-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.sl-level-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#000;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .sl-level-val{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600}
 .sl-level-val.gold{color:var(--gold)}
 .sl-level-val.red{color:var(--red)}
 .sl-level-val.dim{color:var(--dim)}
 .sl-analysis{margin-top:2px;background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--red);padding:24px}
 .sl-analysis-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
-.sl-analysis p{font-size:13px;color:var(--dim);line-height:1.75}
+.sl-analysis p{font-size:13px;color:#000;font-weight:500;line-height:1.75}
 .sl-analysis p+p{margin-top:10px}
 .sl-analysis strong{color:var(--white);font-weight:500}
 
@@ -181,10 +181,10 @@ section+section{border-top:1px solid var(--border)}
 .estr-weight{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:600;line-height:1;margin-bottom:4px}
 .estr-weight.green{color:var(--green)}
 .estr-weight.red{color:var(--red)}
-.estr-name{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
+.estr-name{font-family:'JetBrains Mono',monospace;font-size:10px;color:#000;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
 .estr-rows{display:flex;flex-direction:column;gap:0}
 .estr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--border);font-size:12px}
-.estr-row-key{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.estr-row-key{color:#000;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .estr-row-val{color:var(--white);font-weight:500}
 .estr-row-val.green{color:var(--green)}
 .estr-row-val.red{color:var(--red)}
@@ -205,7 +205,7 @@ section+section{border-top:1px solid var(--border)}
 .risk-n.r3{background:rgba(74,158,204,.1);color:var(--blue)}
 .risk-content{padding:20px 24px;border-left:1px solid var(--border)}
 .risk-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px}
-.risk-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.risk-desc{font-size:13px;color:#111;font-weight:500;line-height:1.6}
 .risk-badge{align-self:center;margin:0 20px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;white-space:nowrap;border:1px solid}
 .risk-badge.rb1{color:var(--red);border-color:rgba(224,82,82,.4)}
 .risk-badge.rb2{color:var(--gold);border-color:rgba(201,168,76,.4)}
@@ -220,7 +220,7 @@ section+section{border-top:1px solid var(--border)}
 .cp{background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--gold);padding:28px;transition:transform .2s}
 .cp:hover{transform:translateY(-4px)}
 .cp-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
-.cp-body{font-size:13px;color:var(--muted);line-height:1.75}
+.cp-body{font-size:13px;color:#111;font-weight:500;line-height:1.75}
 .cp-body strong{color:var(--white);font-weight:500}
 .conc-tags{display:flex;gap:2px;flex-wrap:wrap}
 .ctag{padding:12px 24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--white)}
@@ -236,7 +236,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
 
 /* CHART */
 .chart-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px}
-.cl-item{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.cl-item{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#000;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .cl-dot{width:20px;height:2px;flex-shrink:0}
 
 /* ANIMATIONS */
@@ -271,8 +271,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
     <li><a href="#treasury">Treasury</a></li>
     <li><a href="#bund">Bund</a></li>
     <li><a href="#estrategia">Estrategia</a></li>
-    <li><a href="#riesgos">Riesgos</a></li>
-    <li><a href="#conclusion">Conclusión</a></li>
+    <li><a href="#riesgos">Riesgos &amp; Conclusión</a></li>
   </ul>
   <div class="nav-cta"><span class="bme-icon">B</span> Instituto BME</div>
 </nav>
@@ -282,7 +281,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
   <div class="hero-noise"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">Análisis Macro · Renta Fija · 2026</div>
+    <div class="hero-eyebrow" style="display:none">Análisis Macro · Renta Fija · 2026</div>
     <h1 class="hero-h1" style="font-size:clamp(48px,7vw,92px);margin-bottom:32px">
       <span>Bund</span>
       <span class="vs-word">vs</span>
@@ -353,7 +352,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
 
   <div class="escenario-box reveal d4">
     <div class="esc-panel base-eu">
-      <div class="esc-title">🇩🇪 Bund — Escenario de tipos</div>
+      <div class="esc-title">🇩🇪 Bund — Escenario de tipos · <span style="color:var(--gold)">7,5 años</span></div>
       <div class="esc-tir-row">
         <span class="esc-tir-label">TIR actual</span>
         <span class="esc-tir-val red">2,77%</span>
@@ -364,7 +363,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
       </div>
     </div>
     <div class="esc-panel base-us">
-      <div class="esc-title">🇺🇸 Treasury — Escenario de tipos</div>
+      <div class="esc-title">🇺🇸 Treasury — Escenario de tipos · <span style="color:var(--gold)">1,5 años</span></div>
       <div class="esc-tir-row">
         <span class="esc-tir-label">TIR actual</span>
         <span class="esc-tir-val green">3,67%</span>
@@ -408,12 +407,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
         <tr><td>Vencimiento</td><td colspan="2" style="color:var(--dim)">15/08/2033</td></tr>
         <tr><td>Venc. en años</td><td class="warn">7,44</td><td class="warn">6,63</td></tr>
         <tr><td>Cupón</td><td colspan="2">2,60%</td></tr>
-        <tr><td>Precio limpio</td><td>98,891%</td><td>96,748%</td></tr>
-        <tr><td>TIR</td><td>2,77%</td><td class="lose">3,15%</td></tr>
-        <tr><td>∆ TIR</td><td colspan="2" class="lose">+0,38% (+38pb)</td></tr>
         <tr><td>Rating</td><td colspan="2" class="win">AAA</td></tr>
         <tr><td>Repo 9 meses</td><td colspan="2" class="lose">2,08%</td></tr>
-        <tr><td>Retorno neto</td><td colspan="2" class="win">0,437%</td></tr>
       </table>
     </div>
 
@@ -442,12 +437,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
         <tr><td>Vencimiento</td><td colspan="2" style="color:var(--dim)">15/06/2027</td></tr>
         <tr><td>Venc. en años</td><td class="warn">1,26</td><td class="warn">0,46</td></tr>
         <tr><td>Cupón</td><td colspan="2">4,625%</td></tr>
-        <tr><td>Precio limpio</td><td>101,16%</td><td>100,78%</td></tr>
-        <tr><td>TIR</td><td>3,67%</td><td class="win">3,30%</td></tr>
-        <tr><td>∆ TIR</td><td colspan="2" class="win">−0,37% (−37pb)</td></tr>
         <tr><td>Rating</td><td colspan="2" class="win">AA+</td></tr>
-        <tr><td>Carry+RD (Rolling Yield)</td><td colspan="2" class="win">1,4913%</td></tr>
-        <tr><td>Retorno estimado</td><td colspan="2" class="win">1,938%</td></tr>
       </table>
     </div>
   </div>
@@ -459,56 +449,60 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
   <h2 class="sec-title reveal d1"><em>US Treasury</em></h2>
   <p class="sec-lead reveal d2">Análisis de retorno y cobertura de divisa del Treasury 2Y · US91282CKV27</p>
 
-  <div class="kpi-row reveal d2" style="grid-template-columns:repeat(6,1fr)">
+  <div class="kpi-row reveal d2" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
     <div class="kpi k-blue">
       <div class="kpi-tag">TIR Inicial</div>
-      <div class="kpi-val" style="font-size:28px">3,67%</div>
+      <div class="kpi-val" style="font-size:32px">3,67%</div>
       <div class="kpi-note">11/03/2026</div>
     </div>
     <div class="kpi k-blue">
       <div class="kpi-tag">Duración</div>
-      <div class="kpi-val" style="font-size:28px">294d</div>
+      <div class="kpi-val" style="font-size:32px">294d</div>
       <div class="kpi-note">Horizonte inversión</div>
     </div>
     <div class="kpi k-green">
       <div class="kpi-tag">TIR Previsión</div>
-      <div class="kpi-val" style="font-size:28px">3,30%</div>
+      <div class="kpi-val" style="font-size:32px">3,30%</div>
       <div class="kpi-note">Objetivo 30/12/2026</div>
-    </div>
-    <div class="kpi k-green">
-      <div class="kpi-tag">Retorno Carry</div>
-      <div class="kpi-val" style="font-size:28px">1,491%</div>
-      <div class="kpi-note">Rolling Yield</div>
-    </div>
-    <div class="kpi k-gold">
-      <div class="kpi-tag">Retorno TIR</div>
-      <div class="kpi-val" style="font-size:28px">0,447%</div>
-      <div class="kpi-note">Por movimiento precio</div>
-    </div>
-    <div class="kpi k-gold">
-      <div class="kpi-tag">Retorno Estimado</div>
-      <div class="kpi-val" style="font-size:28px">1,938%</div>
-      <div class="kpi-note">Total · sin cobertura</div>
     </div>
   </div>
 
-  <div style="margin-top:8px" class="reveal d3">
-    <div class="data-block-title">Cobertura EUR/USD · 9 meses</div>
-    <table class="dt">
-      <tr><th>Concepto</th><th>11/03/2026</th><th>30/12/2026</th></tr>
-      <tr><td>Efectivo USD</td><td>306.795</td><td>312.741</td></tr>
-      <tr><td>Efectivo EUR</td><td>265.045</td><td>266.163</td></tr>
-      <tr><td>EUR/USD</td><td class="warn">1,1575</td><td class="warn">1,175</td></tr>
-      <tr><td>Contratos</td><td>26,50</td><td>27,00</td></tr>
-      <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Coste por contrato</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">−266,07</td></tr>
-      <tr style="background:rgba(61,187,127,.07)"><td style="color:var(--green);font-weight:500">Rdto. bono USD</td><td colspan="2" style="color:var(--green);font-weight:600;text-align:center">5.945,97 &nbsp;(1,94%)</td></tr>
-      <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Rdto. EUR sin cobertura</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">1.117,43 &nbsp;(0,42%)</td></tr>
-      <tr style="background:rgba(61,187,127,.07)"><td style="color:var(--green);font-weight:500">Rdto. EUR con cobertura</td><td colspan="2" style="color:var(--green);font-weight:600;text-align:center">5.539,44 &nbsp;(2,09%)</td></tr>
-      <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Cost of carry cobertura</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">−7.183,85 &nbsp;(2,71%)</td></tr>
-      <tr style="background:rgba(224,82,82,.15);border-top:1px solid rgba(224,82,82,.3)"><td style="color:var(--red);font-weight:700;font-size:13px">Resultado neto</td><td colspan="2" style="color:var(--red);font-weight:700;font-size:14px;text-align:center">−1.644,40 &nbsp;(−0,62%)</td></tr>
+  <!-- Precio limpio -->
+  <div class="reveal d2" style="margin-bottom:24px">
+    <table class="dt" style="width:100%">
+      <tr><th>Precio limpio</th><th>TD 11/03/2026</th><th>SD 30/12/2026</th></tr>
+      <tr><td style="color:var(--gold);font-weight:500">US Treasury 2Y</td><td class="win">101,16%</td><td class="win">100,78%</td></tr>
     </table>
-    <div style="margin-top:8px;padding:10px 14px;background:var(--red-dim);border:1px solid rgba(224,82,82,.2)">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red)">⚠ El coste de cobertura (2,71%) supera el retorno del bono — posición sin cobertura más eficiente en escenario base.</span>
+  </div>
+
+  <!-- Tablas retorno + cobertura side by side -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" class="reveal d3">
+    <div>
+      <div class="data-block-title">Retorno — US Treasury</div>
+      <table class="dt">
+        <tr><th>Componente</th><th>Valor</th></tr>
+        <tr><td>Retorno carry</td><td class="win">1,491%</td></tr>
+        <tr><td>Retorno TIR</td><td class="win">0,4468%</td></tr>
+        <tr><td>Retorno convexidad</td><td class="win">0,0000144%</td></tr>
+        <tr style="border-top:1px solid rgba(61,187,127,.3)"><td style="color:var(--green);font-weight:600">Retorno estimado</td><td class="win" style="font-size:14px;font-weight:600">1,938%</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="data-block-title">Cobertura EUR/USD · 9 meses</div>
+      <table class="dt">
+        <tr><th>Concepto</th><th>11/03/2026</th><th>30/12/2026</th></tr>
+        <tr><td>EUR/USD</td><td class="warn">1,1575</td><td class="warn">1,175</td></tr>
+        <tr><td>Contratos</td><td>26,50</td><td>27,00</td></tr>
+        <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Coste por contrato</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">−266,07</td></tr>
+        <tr style="background:rgba(61,187,127,.07)"><td style="color:var(--green);font-weight:500">Rdto. bono USD</td><td colspan="2" style="color:var(--green);font-weight:600;text-align:center">5.945,97 (1,94%)</td></tr>
+        <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Rdto. EUR sin cobertura</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">1.117,43 (0,42%)</td></tr>
+        <tr style="background:rgba(61,187,127,.07)"><td style="color:var(--green);font-weight:500">Rdto. EUR con cobertura</td><td colspan="2" style="color:var(--green);font-weight:600;text-align:center">5.539,44 (2,09%)</td></tr>
+        <tr style="background:rgba(224,82,82,.07)"><td style="color:var(--red);font-weight:500">Cost of carry cobertura</td><td colspan="2" style="color:var(--red);font-weight:600;text-align:center">−7.183,85 (2,71%)</td></tr>
+        <tr style="background:rgba(224,82,82,.15)"><td style="color:var(--red);font-weight:700">Resultado neto</td><td colspan="2" style="color:var(--red);font-weight:700;font-size:13px;text-align:center">−1.644,40 (−0,62%)</td></tr>
+      </table>
+      <div style="margin-top:8px;padding:10px 14px;background:var(--red-dim);border:1px solid rgba(224,82,82,.2)">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red)">⚠ El coste de cobertura (2,71%) supera el retorno del bono — posición sin cobertura más eficiente.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -519,79 +513,71 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
   <h2 class="sec-title reveal d1"><em>Bund Alemán</em></h2>
   <p class="sec-lead reveal d2">Análisis de retorno y Stop Loss del Bund 7Y · DE000BU2Z015 · Posición Corta</p>
 
-  <div class="kpi-row reveal d2" style="grid-template-columns:repeat(6,1fr)">
+  <div class="kpi-row reveal d2" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
     <div class="kpi k-red">
       <div class="kpi-tag">TIR Inicial</div>
-      <div class="kpi-val" style="font-size:28px">2,77%</div>
+      <div class="kpi-val" style="font-size:32px">2,77%</div>
       <div class="kpi-note">11/03/2026</div>
     </div>
     <div class="kpi k-red">
       <div class="kpi-tag">Duración</div>
-      <div class="kpi-val" style="font-size:28px">270d</div>
+      <div class="kpi-val" style="font-size:32px">270d</div>
       <div class="kpi-note">Horizonte inversión</div>
     </div>
     <div class="kpi k-red">
       <div class="kpi-tag">TIR Previsión</div>
-      <div class="kpi-val" style="font-size:28px">3,15%</div>
+      <div class="kpi-val" style="font-size:32px">3,15%</div>
       <div class="kpi-note">Objetivo 30/12/2026</div>
     </div>
-    <div class="kpi k-gold">
-      <div class="kpi-tag">Retorno Carry</div>
-      <div class="kpi-val" style="font-size:28px">2,046%</div>
-      <div class="kpi-note">Carry posición</div>
-    </div>
-    <div class="kpi k-gold">
-      <div class="kpi-tag">Retorno TIR</div>
-      <div class="kpi-val" style="font-size:28px">2,518%</div>
-      <div class="kpi-note">Por movimiento precio</div>
-    </div>
-    <div class="kpi k-green">
-      <div class="kpi-tag">Retorno Estimado</div>
-      <div class="kpi-val" style="font-size:28px">2,517%</div>
-      <div class="kpi-note">Retorno neto: 0,437%</div>
-    </div>
   </div>
 
-  <div class="sl-grid reveal d3">
-    <div class="sl-chart-box">
-      <div class="chart-label">TIR Bund 7Y · Media y bandas de desviación estándar (Jul 2022 – Mar 2026)</div>
-      <canvas id="slChart" height="260"></canvas>
-      <div class="chart-legend" style="margin-top:14px">
-        <div class="cl-item"><span class="cl-dot" style="background:#4A9ECC"></span>TIR 7Y</div>
-        <div class="cl-item"><span class="cl-dot" style="background:var(--gold)"></span>Media 2,35%</div>
-        <div class="cl-item"><span class="cl-dot" style="background:var(--red)"></span>Stop Loss 2,55%</div>
-        <div class="cl-item"><span class="cl-dot" style="background:#9B59B6"></span>+2σ / +3σ</div>
-        <div class="cl-item"><span class="cl-dot" style="background:var(--green)"></span>−1σ / −2σ</div>
-      </div>
-    </div>
+  <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:24px" class="reveal d3">
+    <!-- Retorno -->
     <div>
-      <div class="sl-levels reveal d4">
-        <div class="sl-level"><span class="sl-level-label">Media histórica</span><span class="sl-level-val dim">2,35%</span></div>
-        <div class="sl-level"><span class="sl-level-label">+1 Desv. Estándar</span><span class="sl-level-val gold">2,57%</span></div>
-        <div class="sl-level"><span class="sl-level-label">Stop Loss fijado</span><span class="sl-level-val gold">2,55%</span></div>
-        <div class="sl-level"><span class="sl-level-label">+2 Desv. Estándar</span><span class="sl-level-val red">2,78%</span></div>
-        <div class="sl-level"><span class="sl-level-label">+3 Desv. Estándar</span><span class="sl-level-val red">3,00%</span></div>
-        <div class="sl-level" style="border:1px solid rgba(224,82,82,.4);background:var(--red-dim)">
-          <span class="sl-level-label" style="color:var(--red)">Pronóstico TIR</span>
-          <span class="sl-level-val red">3,15%</span>
+      <div class="data-block-title">Retorno — Bund Alemán</div>
+      <table class="dt">
+        <tr><th>Componente</th><th>Valor</th></tr>
+        <tr><td>Repo 9 meses</td><td style="color:#000;font-weight:600;text-align:center">2,080%</td></tr>
+        <tr><td>Retorno carry</td><td style="color:#555;font-weight:600;text-align:center">—</td></tr>
+        <tr><td>Retorno TIR</td><td class="win">2,518%</td></tr>
+        <tr><td>Retorno convexidad</td><td class="win">0,0004%</td></tr>
+        <tr style="border-top:1px solid rgba(61,187,127,.3)"><td style="color:var(--green);font-weight:600">Retorno estimado</td><td class="win" style="font-size:14px;font-weight:600">2,517%</td></tr>
+      </table>
+
+      <!-- Stop loss levels -->
+      <div style="margin-top:16px">
+        <div class="data-block-title">Niveles Stop Loss</div>
+        <div class="sl-levels">
+          <div class="sl-level"><span class="sl-level-label">Media histórica</span><span class="sl-level-val dim">2,35%</span></div>
+          <div class="sl-level"><span class="sl-level-label">+1 Desv. Estándar</span><span class="sl-level-val gold">2,57%</span></div>
+          <div class="sl-level"><span class="sl-level-label">Stop Loss fijado</span><span class="sl-level-val gold">2,55%</span></div>
+          <div class="sl-level"><span class="sl-level-label">+2 Desv. Estándar</span><span class="sl-level-val red">2,78%</span></div>
+          <div class="sl-level"><span class="sl-level-label">+3 Desv. Estándar</span><span class="sl-level-val red">3,00%</span></div>
+          <div class="sl-level" style="border:1px solid rgba(224,82,82,.4);background:var(--red-dim)">
+            <span class="sl-level-label" style="color:var(--red)">Pronóstico TIR</span>
+            <span class="sl-level-val red">3,15%</span>
+          </div>
+        </div>
+        <div class="sl-analysis" style="margin-top:4px">
+          <div class="sl-analysis-title">Visión de la posición</div>
+          <p>La TIR del Bund 7Y supera las <strong>+2 desviaciones estándar</strong> sobre su media histórica (2,35%).</p>
+          <p>Stop loss fijado en <strong>2,55%</strong>, ya superado — confirma la dirección del trade.</p>
         </div>
       </div>
-      <div class="sl-analysis reveal d5">
-        <div class="sl-analysis-title">Visión de la posición</div>
-        <p>La TIR del Bund 7Y supera las <strong>+3 desviaciones estándar</strong> sobre su media histórica (2,35%).</p>
-        <p>Stop loss fijado en <strong>2,55%</strong>, ya superado — confirma la dirección del trade.</p>
-        <p>Pronóstico objetivo <strong style="color:var(--red)">3,15%</strong> (+3σ).</p>
-      </div>
     </div>
-  </div>
 
-  <div class="sl-chart-box reveal d5" style="margin-top:32px">
-    <div class="chart-label">Simulación P&amp;L del spread trade por escenario de tipos</div>
-    <canvas id="plChart" height="180"></canvas>
-    <div class="chart-legend">
-      <div class="cl-item"><span class="cl-dot" style="background:var(--red)"></span>P&amp;L Bund (corta)</div>
-      <div class="cl-item"><span class="cl-dot" style="background:var(--green)"></span>P&amp;L Treasury (larga)</div>
-      <div class="cl-item"><span class="cl-dot" style="background:var(--gold)"></span>P&amp;L Total spread</div>
+    <!-- Gráfico -->
+    <div>
+      <div class="sl-chart-box">
+        <div class="chart-label">TIR Bund 7Y · Media y bandas de desviación estándar (Jul 2022 – Mar 2026)</div>
+        <canvas id="slChart" height="220"></canvas>
+        <div class="chart-legend" style="margin-top:10px">
+          <div class="cl-item"><span class="cl-dot" style="background:#4A9ECC"></span>TIR 7Y</div>
+          <div class="cl-item"><span class="cl-dot" style="background:var(--gold)"></span>Media 2,35%</div>
+          <div class="cl-item"><span class="cl-dot" style="background:var(--red)"></span>Stop Loss 2,55%</div>
+          <div class="cl-item"><span class="cl-dot" style="background:#9B59B6"></span>+2σ / +3σ</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -603,128 +589,167 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 96px
   <p class="sec-lead reveal d2">La cartera concentra el peso en la posición corta de Bund (70%), donde la duración alta y el movimiento esperado de TIR ofrecen mayor impacto. El 30% en Treasury aporta carry positivo y actúa como cobertura natural.</p>
 
   <div class="estrategia-grid reveal d3">
+    <!-- TREASURY -->
     <div class="estr-panel treasury">
       <div class="estr-weight green">30%</div>
       <div class="estr-name">🇺🇸 US Treasury · Posición Larga</div>
       <div class="estr-rows">
-        <div class="estr-row"><span class="estr-row-key">ISIN</span><span class="estr-row-val">US91282CKV27</span></div>
-        <div class="estr-row"><span class="estr-row-key">Vencimiento</span><span class="estr-row-val">Jun 2027</span></div>
         <div class="estr-row"><span class="estr-row-key">TIR actual</span><span class="estr-row-val">3,67%</span></div>
         <div class="estr-row"><span class="estr-row-key">TIR objetivo</span><span class="estr-row-val green">3,30%</span></div>
         <div class="estr-row"><span class="estr-row-key">Duración mod.</span><span class="estr-row-val">1,205</span></div>
-        <div class="estr-row"><span class="estr-row-key">Repo 9m</span><span class="estr-row-val red">3,60%</span></div>
-        <div class="estr-row"><span class="estr-row-key">Rolling Yield</span><span class="estr-row-val green">1,491%</span></div>
-        <div class="estr-row"><span class="estr-row-key">Retorno estimado</span><span class="estr-row-val green">1,938%</span></div>
-        <div class="estr-row"><span class="estr-row-key">Función en cartera</span><span class="estr-row-val gold">Carry + diversificación</span></div>
+        <div class="estr-row"><span class="estr-row-key">Resultado con cobertura</span><span class="estr-row-val gold">0,40%</span></div>
+        <div class="estr-row"><span class="estr-row-key">Resultado sin cobertura</span><span class="estr-row-val green">0,69%</span></div>
       </div>
     </div>
+    <!-- BUND -->
     <div class="estr-panel bund">
       <div class="estr-weight red">70%</div>
       <div class="estr-name">🇩🇪 Bund Alemán · Posición Corta</div>
       <div class="estr-rows">
-        <div class="estr-row"><span class="estr-row-key">ISIN</span><span class="estr-row-val">DE000BU2Z015</span></div>
-        <div class="estr-row"><span class="estr-row-key">Vencimiento</span><span class="estr-row-val">Ago 2033</span></div>
         <div class="estr-row"><span class="estr-row-key">TIR actual</span><span class="estr-row-val">2,77%</span></div>
         <div class="estr-row"><span class="estr-row-key">TIR objetivo</span><span class="estr-row-val red">3,15%</span></div>
         <div class="estr-row"><span class="estr-row-key">Duración mod.</span><span class="estr-row-val">6,558</span></div>
         <div class="estr-row"><span class="estr-row-key">Stop loss</span><span class="estr-row-val red">2,55% (superado ✓)</span></div>
         <div class="estr-row"><span class="estr-row-key">Repo 9m</span><span class="estr-row-val">2,080%</span></div>
-        <div class="estr-row"><span class="estr-row-key">Retorno neto</span><span class="estr-row-val green">0,437%</span></div>
-        <div class="estr-row"><span class="estr-row-key">Función en cartera</span><span class="estr-row-val gold">Motor principal P&amp;L</span></div>
       </div>
     </div>
   </div>
 
-  <div class="estrategia-resumen reveal d4">
-    <div>
-      <div class="er-label">Duración ponderada cartera</div>
-      <div class="er-val">4,96</div>
-      <div class="er-sub">70% × 6,558 + 30% × 1,205</div>
-    </div>
-    <div>
-      <div class="er-label">Retorno esperado cartera</div>
-      <div class="er-val">0,89%</div>
-      <div class="er-sub">70% × 0,437% + 30% × 1,938%</div>
-    </div>
-    <div>
-      <div class="er-label">Spread trade capturado</div>
-      <div class="er-val">+85pb</div>
-      <div class="er-sub">∆TIR Bund (+38pb) + ∆TIR Treasury (−37pb) ajustado duración</div>
-    </div>
+  <!-- TABLA RESULTADOS DE LA IMAGEN -->
+  <div class="reveal d4" style="margin-top:24px;overflow-x:auto">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)">Resultados de la Cartera · Escenarios de Cobertura</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'JetBrains Mono',monospace">
+      <thead>
+        <tr>
+          <th colspan="3" style="background:#1A1F2E;color:#fff;padding:8px 12px;text-align:center;font-size:10px;letter-spacing:.1em">11/03/2026</th>
+          <th style="background:#fff;border:none;width:16px"></th>
+          <th colspan="3" style="background:#1A7A4A;color:#fff;padding:8px 12px;text-align:center;font-size:10px;letter-spacing:.1em">30/12/2026 · Con Cobertura</th>
+          <th style="background:#fff;border:none;width:16px"></th>
+          <th colspan="3" style="background:#1A7A4A;color:#fff;padding:8px 12px;text-align:center;font-size:10px;letter-spacing:.1em">30/12/2026 · Sin Cobertura</th>
+        </tr>
+        <tr style="background:var(--surface)">
+          <th style="padding:7px 12px;text-align:left;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Nominal</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Efectivo USD</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Efectivo EUR</th>
+          <th style="border:none"></th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Efectivo EUR</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">%</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Peso</th>
+          <th style="border:none"></th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Efectivo EUR</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">%</th>
+          <th style="padding:7px 12px;text-align:right;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)">Peso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(192,57,43,.08)">
+          <td style="padding:8px 12px;font-weight:700;color:var(--red);border-bottom:1px solid var(--border)">300.000,00</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">306.795,03</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">265.045,13</td>
+          <td style="border:none"></td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">263.400,72</td>
+          <td style="padding:8px 12px;text-align:right;color:var(--red);font-weight:600;border-bottom:1px solid var(--border)">−0,62%</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">27,4%</td>
+          <td style="border:none"></td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">266.162,55</td>
+          <td style="padding:8px 12px;text-align:right;color:var(--green);font-weight:600;border-bottom:1px solid var(--border)">0,42%</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)"></td>
+        </tr>
+        <tr style="background:rgba(26,122,74,.08)">
+          <td style="padding:8px 12px;font-weight:700;color:var(--green);border-bottom:1px solid var(--border)">700.000,00</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">702.954,78</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">702.954,78</td>
+          <td style="border:none"></td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">708.469,68</td>
+          <td style="padding:8px 12px;text-align:right;color:var(--green);font-weight:600;border-bottom:1px solid var(--border)">0,78%</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">72,6%</td>
+          <td style="border:none"></td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)">708.469,68</td>
+          <td style="padding:8px 12px;text-align:right;color:var(--green);font-weight:600;border-bottom:1px solid var(--border)">0,78%</td>
+          <td style="padding:8px 12px;text-align:right;border-bottom:1px solid var(--border)"></td>
+        </tr>
+        <tr style="background:rgba(184,144,42,.10);font-weight:700">
+          <td style="padding:10px 12px;color:var(--gold)">1.000.000,00</td>
+          <td style="padding:10px 12px;text-align:right"></td>
+          <td style="padding:10px 12px;text-align:right;color:var(--white)">967.999,90</td>
+          <td style="border:none"></td>
+          <td style="padding:10px 12px;text-align:right;color:var(--white)">971.870,40</td>
+          <td style="padding:10px 12px;text-align:right;color:var(--green);font-size:14px">0,40%</td>
+          <td style="padding:10px 12px;text-align:right"></td>
+          <td style="border:none"></td>
+          <td style="padding:10px 12px;text-align:right;color:var(--white)">974.632,24</td>
+          <td style="padding:10px 12px;text-align:right;color:var(--green);font-size:14px">0,69%</td>
+          <td style="padding:10px 12px;text-align:right"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
-<!-- ═══ 07 RIESGOS ══════════════════════════════════════════ -->
+<!-- ═══ 07 RIESGOS + CONCLUSIÓN ══════════════════════════════ -->
 <section id="riesgos">
-  <div class="sec-num reveal">07 — Riesgos</div>
-  <h2 class="sec-title reveal d1">Escenarios adversos<br><em>del trade</em></h2>
-  <p class="sec-lead reveal d2">El análisis de riesgos es parte integral de la tesis — un tribunal de renta fija exige conocer los escenarios adversos y sus implicaciones sobre la cartera.</p>
+  <div class="sec-num reveal">07 — Riesgos &amp; Recomendación</div>
+  <h2 class="sec-title reveal d1">Escenarios adversos<br><em>&amp; Recomendación final</em></h2>
 
-  <div class="risk-list">
-    <div class="risk-item reveal d2">
-      <div class="risk-n r1">01</div>
-      <div class="risk-content">
-        <div class="risk-title">Inflación persistente — Fed no baja tipos</div>
-        <div class="risk-desc">Combinación de aranceles, salarios, energía y expansión fiscal (OBBB) que obligue a mantener tipos altos más tiempo. Inflación repunta sin alcanzar recesión — crecimiento estancado. Las TIRes de Treasuries también repuntan (contagio desde EE.UU. a Europa), ampliando spreads soberanos. Caídas en precios de bonos, especialmente en tramos largos. La posición larga pierde valor.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+    <!-- RIESGOS -->
+    <div>
+      <div class="risk-list">
+        <div class="risk-item reveal d2">
+          <div class="risk-n r1">01</div>
+          <div class="risk-content">
+            <div class="risk-title">Inflación persistente — tipos altos más tiempo</div>
+            <div class="risk-desc">Aranceles, salarios y OBBB mantienen inflación elevada. TIRes de Treasuries repuntan. La posición larga pierde valor.</div>
+          </div>
+          <div class="risk-badge rb1">Larga</div>
+        </div>
+        <div class="risk-item reveal d3">
+          <div class="risk-n r2">02</div>
+          <div class="risk-content">
+            <div class="risk-title">Europa en recesión — bajadas de tipos</div>
+            <div class="risk-desc">Recesión profunda fuerza al BCE a bajar tipos. Precio del Bund sube, perjudicando la posición corta.</div>
+          </div>
+          <div class="risk-badge rb2">Corta</div>
+        </div>
+        <div class="risk-item reveal d4">
+          <div class="risk-n r3">03</div>
+          <div class="risk-content">
+            <div class="risk-title">Convergencia de políticas monetarias</div>
+            <div class="risk-desc">BCE y Fed actúan coordinadamente. El spread no se mueve. El trade no genera retorno — riesgo principal.</div>
+          </div>
+          <div class="risk-badge rb3">Trade</div>
+        </div>
       </div>
-      <div class="risk-badge rb1">Posición larga</div>
-    </div>
-    <div class="risk-item reveal d3">
-      <div class="risk-n r2">02</div>
-      <div class="risk-content">
-        <div class="risk-title">Europa entra en recesión — BCE baja tipos</div>
-        <div class="risk-desc">Si la eurozona entra en recesión profunda, el BCE podría verse forzado a bajar tipos. El precio del Bund subiría, perjudicando la posición corta. Riesgo amplificado por los frentes fiscales abiertos en países periféricos que podrían acelerar la respuesta del BCE.</div>
+      <div class="risk-footer reveal d5" style="margin-top:8px">
+        "El riesgo principal es la convergencia de políticas — neutralizaría el trade por completo."
       </div>
-      <div class="risk-badge rb2">Posición corta</div>
     </div>
-    <div class="risk-item reveal d4">
-      <div class="risk-n r3">03</div>
-      <div class="risk-content">
-        <div class="risk-title">Convergencia de políticas — movimientos sincronizados</div>
-        <div class="risk-desc">Si BCE y Fed actúan de forma coordinada (ambos suben o ambos bajan), el spread entre curvas no se mueve. El trade no genera retorno. Este es el riesgo principal y el más difícil de gestionar — neutralizaría el trade por completo.</div>
-      </div>
-      <div class="risk-badge rb3">Trade completo</div>
-    </div>
-  </div>
-  <div class="risk-footer reveal d5">
-    "El principal riesgo es la convergencia de políticas monetarias en lugar de divergencia. Una inflación persistente que contagie las TIRes europeas desde EE.UU. es el escenario más adverso — reduciría duración global y concentraría cartera en tramos cortos con cupones altos."
-  </div>
-</section>
 
-<!-- ═══ 08 CONCLUSIÓN ═══════════════════════════════════════ -->
-<section id="conclusion">
-  <div class="sec-num reveal">08 — Conclusión</div>
-  <h2 class="sec-title reveal d1">Recomendación<br><em>final</em></h2>
-
-  <div class="conc-quote reveal d2">
-    <p>"La divergencia entre la política monetaria del BCE y la Reserva Federal, amplificada por el OBBB en EE.UU. y la expansión fiscal alemana, crea una oportunidad estructural. Una cartera 70% corta en Bund / 30% larga en Treasury ofrece carry atractivo, potencial de plusvalías en desaceleración y protección relativa frente a la inflación."</p>
-  </div>
-
-  <div class="conc-pillars reveal d3">
-    <div class="cp">
-      <div class="cp-title">Soporte Macro</div>
-      <div class="cp-body">
-        <strong>BCE bajo presión al alza vs Fed bajista.</strong> OBBB abre ventana en Treasuries. Expansión fiscal alemana presiona Bund estructuralmente. Divergencia confirmada como tesis de partida.
+    <!-- CONCLUSIÓN -->
+    <div class="reveal d2">
+      <div class="conc-quote" style="margin-bottom:20px">
+        <p>"La divergencia BCE/Fed, amplificada por el OBBB y la expansión fiscal alemana, crea una oportunidad estructural. Una cartera 70% corta en Bund / 30% larga en Treasury ofrece carry atractivo y potencial de plusvalías en el escenario base."</p>
+      </div>
+      <div class="conc-pillars" style="grid-template-columns:1fr;gap:2px;margin-bottom:16px">
+        <div class="cp">
+          <div class="cp-title">Soporte Macro</div>
+          <div class="cp-body"><strong>Subidas previstas Europa vs bajadas EE.UU.</strong> OBBB + expansión fiscal alemana divergencia estructural confirmada.</div>
+        </div>
+        <div class="cp">
+          <div class="cp-title">Soporte Cuantitativo</div>
+          <div class="cp-body"><strong>Rolling Yield Treasury 1,491%.</strong> Stop loss Bund superado (2,55% ✓). TIR objetivo Bund 3,15% (+2σ). Resultados: sin cobertura 0,69% · con cobertura 0,40%.</div>
+        </div>
+        <div class="cp">
+          <div class="cp-title">Perfil Riesgo-Retorno</div>
+          <div class="cp-body"><strong>Favorable en escenario base.</strong> 70% Bund corto / 30% Treasury largo. Riesgo acotado y monitorizable.</div>
+        </div>
+      </div>
+      <div class="conc-tags">
+        <div class="ctag red">🔴 70% Corto Bund</div>
+        <div class="ctag green">🟢 30% Largo Treasury</div>
+        <div class="ctag gold">⚡ Divergencia BCE/Fed</div>
       </div>
     </div>
-    <div class="cp">
-      <div class="cp-title">Soporte Cuantitativo</div>
-      <div class="cp-body">
-        <strong>Rolling Yield Treasury 1,491%.</strong> Stop loss Bund superado (2,55% ✓). TIR objetivo Bund 3,15% (+3σ). Retorno neto Bund 0,437%. Cobertura EUR/USD costosa — posición sin cobertura preferida.
-      </div>
-    </div>
-    <div class="cp">
-      <div class="cp-title">Perfil Riesgo-Retorno</div>
-      <div class="cp-body">
-        <strong>Favorable en escenario base.</strong> Ponderación 70% Bund / 30% Treasury. Riesgo principal: convergencia de políticas o inflación persistente con contagio a Europa. Acotado y monitorizable.
-      </div>
-    </div>
-  </div>
-
-  <div class="conc-tags reveal d4">
-    <div class="ctag red">🔴 70% Corto Bund · Europa</div>
-    <div class="ctag green">🟢 30% Largo Treasuries · EE.UU.</div>
-    <div class="ctag gold">⚡ Spread Trade · Divergencia BCE/Fed</div>
   </div>
 </section>
 
@@ -752,19 +777,19 @@ window.addEventListener('scroll',()=>{const pct=window.scrollY/(document.body.sc
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-Chart.defaults.color='rgba(244,241,235,.35)';
+Chart.defaults.color='rgba(26,31,46,.45)';
 Chart.defaults.font.family="'JetBrains Mono',monospace";
 Chart.defaults.font.size=10;
-const gc='rgba(255,255,255,.05)';
+const gc='rgba(0,0,0,.07)';
 
 new Chart(document.getElementById('plChart'),{
   type:'bar',
   data:{
     labels:['+100 pb','+50 pb','Sin mov.','−50 pb','−100 pb'],
     datasets:[
-      {label:'P&L Bund (corta)',data:[3.5,2.0,0,-1.5,-3.0],backgroundColor:ctx=>ctx.parsed.y>=0?'rgba(61,187,127,.6)':'rgba(224,82,82,.6)',borderRadius:3,order:2},
-      {label:'P&L Treasury (larga)',data:[-0.8,0,0,1.8,3.2],backgroundColor:ctx=>ctx.parsed.y>=0?'rgba(61,187,127,.35)':'rgba(224,82,82,.35)',borderRadius:3,order:2},
-      {label:'P&L Total spread',data:[2.7,2.0,0,0.3,0.2],type:'line',borderColor:'rgba(201,168,76,.9)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#C9A84C',tension:.4,fill:false,order:1}
+      {label:'P&L Bund (corta)',data:[3.5,2.0,0,-1.5,-3.0],backgroundColor:ctx=>ctx.parsed.y>=0?'rgba(26,122,74,.6)':'rgba(192,57,43,.6)',borderRadius:3,order:2},
+      {label:'P&L Treasury (larga)',data:[-0.8,0,0,1.8,3.2],backgroundColor:ctx=>ctx.parsed.y>=0?'rgba(26,122,74,.35)':'rgba(192,57,43,.35)',borderRadius:3,order:2},
+      {label:'P&L Total spread',data:[2.7,2.0,0,0.3,0.2],type:'line',borderColor:'rgba(184,144,42,.9)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#B8902A',tension:.4,fill:false,order:1}
     ]
   },
   options:{responsive:true,plugins:{legend:{labels:{boxWidth:12}},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.y>0?'+':''}${ctx.parsed.y.toFixed(1)}`}}},scales:{x:{grid:{color:gc}},y:{grid:{color:gc},ticks:{callback:v=>(v>0?'+':'')+v.toFixed(1)}}}}
@@ -776,14 +801,14 @@ const n=slL.length;
 new Chart(document.getElementById('slChart'),{
   type:'line',
   data:{labels:slL,datasets:[
-    {label:'TIR 7Y',data:slT,borderColor:'#4A9ECC',borderWidth:2,pointRadius:2.5,pointBackgroundColor:'#4A9ECC',tension:.35,fill:false},
-    {label:'Media 2,35%',data:Array(n).fill(2.35),borderColor:'rgba(201,168,76,.8)',borderWidth:1.5,pointRadius:0,fill:false},
-    {label:'Stop Loss 2,55%',data:Array(n).fill(2.55),borderColor:'rgba(224,82,82,.7)',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false},
-    {label:'+1σ',data:Array(n).fill(2.57),borderColor:'rgba(201,168,76,.3)',borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
-    {label:'+2σ',data:Array(n).fill(2.78),borderColor:'rgba(155,89,182,.6)',borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false},
-    {label:'+3σ',data:Array(n).fill(3.00),borderColor:'rgba(224,82,82,.4)',borderWidth:1,borderDash:[2,5],pointRadius:0,fill:false},
-    {label:'-1σ',data:Array(n).fill(2.18),borderColor:'rgba(61,187,127,.4)',borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
-    {label:'-2σ',data:Array(n).fill(2.00),borderColor:'rgba(61,187,127,.25)',borderWidth:1,borderDash:[2,5],pointRadius:0,fill:false},
+    {label:'TIR 7Y',data:slT,borderColor:'#1D6FA4',borderWidth:2,pointRadius:2.5,pointBackgroundColor:'#1D6FA4',tension:.35,fill:false},
+    {label:'Media 2,35%',data:Array(n).fill(2.35),borderColor:'rgba(184,144,42,.8)',borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Stop Loss 2,55%',data:Array(n).fill(2.55),borderColor:'rgba(192,57,43,.7)',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false},
+    {label:'+1σ',data:Array(n).fill(2.57),borderColor:'rgba(184,144,42,.3)',borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
+    {label:'+2σ',data:Array(n).fill(2.78),borderColor:'rgba(128,0,128,.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false},
+    {label:'+3σ',data:Array(n).fill(3.00),borderColor:'rgba(192,57,43,.4)',borderWidth:1,borderDash:[2,5],pointRadius:0,fill:false},
+    {label:'-1σ',data:Array(n).fill(2.18),borderColor:'rgba(26,122,74,.4)',borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
+    {label:'-2σ',data:Array(n).fill(2.00),borderColor:'rgba(26,122,74,.25)',borderWidth:1,borderDash:[2,5],pointRadius:0,fill:false},
   ]},
   options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${typeof ctx.parsed.y==='number'?ctx.parsed.y.toFixed(2)+'%':''}`}}},scales:{x:{grid:{color:gc},ticks:{maxRotation:0}},y:{min:1.7,max:3.2,grid:{color:gc},ticks:{callback:v=>v.toFixed(2)+'%'}}}}
 });
